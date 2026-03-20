@@ -1,5 +1,6 @@
 {
-  "name": "mio-sito",
+  "name": "raccolta differenziata San Sperate 2026",
+  "homepage": "https://alessandro-gaviano-develop.github.io/differenziata",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
