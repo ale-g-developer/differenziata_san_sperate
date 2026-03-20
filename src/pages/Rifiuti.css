@@ -1,0 +1,326 @@
+/* --- Header --- */
+.rif-page { min-height: 100dvh; }
+
+.rif-header {
+  padding: 1rem 1.25rem 1rem;
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+}
+
+.rif-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.rif-back {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--green);
+  text-decoration: none;
+}
+
+.rif-ora {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--surface);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.rif-title {
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.rif-title span { color: var(--green); }
+
+.rif-gestore {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 0.1rem;
+}
+
+.rif-zone-switch {
+  display: flex;
+  margin-top: 0.75rem;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 3px;
+  border: 1px solid var(--border);
+}
+
+.rif-zone-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.55rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.02em;
+}
+
+.rif-zone-btn.active {
+  background: var(--green);
+  color: #1A1A1A;
+}
+
+/* --- Main --- */
+.rif-main {
+  padding: 1rem 1rem 3rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* --- Messaggio card --- */
+.rif-msg-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.rif-msg-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--green);
+}
+
+.rif-msg-status .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.rif-msg-body {
+  padding: 1rem;
+}
+
+.rif-msg-body .line-header {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.rif-msg-body .line-date {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  margin-top: 0.15rem;
+}
+
+.rif-msg-body .msg-sep {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 0.8rem 0;
+}
+
+.rif-msg-body .line-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+}
+
+.rif-msg-body .line-raccolta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  margin: 0.25rem 0;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.rif-msg-body .line-raccolta.org { background: var(--org-bg); color: var(--org-color); }
+.rif-msg-body .line-raccolta.car { background: var(--car-bg); color: var(--car-color); }
+.rif-msg-body .line-raccolta.pla { background: var(--pla-bg); color: var(--pla-color); }
+.rif-msg-body .line-raccolta.vet { background: var(--vet-bg); color: var(--vet-color); }
+.rif-msg-body .line-raccolta.sec { background: var(--sec-bg); color: var(--sec-color); }
+
+.rif-msg-body .line-nota {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  margin-top: 0.7rem;
+  line-height: 1.5;
+}
+
+.rif-msg-body .line-pannolini {
+  font-size: 0.72rem;
+  color: var(--green);
+  background: var(--green-dim);
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.rif-msg-body .line-nulla {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: var(--text-dim);
+}
+
+.rif-msg-body .line-nulla .big {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+/* --- Settimana --- */
+.rif-section-head {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+.rif-week-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.rif-week-row {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  min-height: 44px;
+  transition: all 0.2s;
+}
+
+.rif-week-row.is-target {
+  border-color: var(--green);
+  box-shadow: 0 0 0 1px var(--green), 0 0 12px rgba(92,185,122,0.15);
+}
+
+.rif-week-day {
+  width: 64px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.45rem 0.55rem;
+  background: var(--surface2);
+  border-right: 1px solid var(--border);
+}
+
+.rif-week-day .dow {
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rif-week-day .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.rif-week-items {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.55rem;
+  flex-wrap: wrap;
+}
+
+.mini-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.18rem 0.45rem;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.mini-tag.org { background: var(--org-bg); color: var(--org-color); }
+.mini-tag.car { background: var(--car-bg); color: var(--car-color); }
+.mini-tag.pla { background: var(--pla-bg); color: var(--pla-color); }
+.mini-tag.vet { background: var(--vet-bg); color: var(--vet-color); }
+.mini-tag.sec { background: var(--sec-bg); color: var(--sec-color); }
+.mini-tag.festa { background: var(--festa-bg); color: var(--festa-color); }
+
+.week-empty {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+
+/* --- Contatti --- */
+.rif-contatti {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.rif-contatti strong { color: var(--text); }
+
+/* --- Loading / Error --- */
+.rif-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  color: var(--text-dim);
+  gap: 0.8rem;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.rif-error {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--festa-color);
+}
