@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/differenziata/static/css/main.b4be97b7.css",
-    "main.js": "/differenziata/static/js/main.ba631bff.js",
-    "index.html": "/differenziata/index.html",
-    "main.b4be97b7.css.map": "/differenziata/static/css/main.b4be97b7.css.map",
-    "main.ba631bff.js.map": "/differenziata/static/js/main.ba631bff.js.map"
+    "main.css": "/differenziata_san_sperate/static/css/main.b4be97b7.css",
+    "main.js": "/differenziata_san_sperate/static/js/main.fcfad65a.js",
+    "index.html": "/differenziata_san_sperate/index.html",
+    "main.b4be97b7.css.map": "/differenziata_san_sperate/static/css/main.b4be97b7.css.map",
+    "main.fcfad65a.js.map": "/differenziata_san_sperate/static/js/main.fcfad65a.js.map"
   },
   "entrypoints": [
     "static/css/main.b4be97b7.css",
-    "static/js/main.ba631bff.js"
+    "static/js/main.fcfad65a.js"
   ]
 }
