@@ -6,8 +6,8 @@ import Rifiuti from './pages/Rifiuti';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/rifiuti" element={<Rifiuti />} />
+      <Route path="/" element={<Rifiuti />} />
+      <Route path="/home" element={<Home />} />
     </Routes>
   );
 }
