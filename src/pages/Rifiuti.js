@@ -125,6 +125,10 @@ function Rifiuti() {
         <h2 className="rif-section-head">📋 Questa settimana</h2>
         <WeekGrid cal={cal} zona={zona} targetKey={dateKey(target.date)} />
 
+        {/* ECOCENTRO */}
+        <h2 className="rif-section-head">🏭 Orari Ecocentro</h2>
+        <EcocentroSection ecocentro={cal.ecocentro} />
+
         {/* CONTATTI */}
         <div className="rif-contatti">
           <strong>{cal.gestore}</strong> — {cal.anno}<br />
@@ -173,6 +177,32 @@ function WeekGrid({ cal, zona, targetKey }) {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// --- Componente ecocentro ---
+function EcocentroSection({ ecocentro }) {
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  const isInverno = month >= 10 || month <= 4;
+  const orari = isInverno ? ecocentro.orario_invernale : ecocentro.orario_estivo;
+
+  const giorni = ['lunedi', 'martedi', 'mercoledi', 'giovedi', 'venerdi', 'sabato'];
+
+  return (
+    <div className="rif-ecocentro">
+      <div className="eco-period">
+        📅 {orari.periodo} — {isInverno ? 'Invernale' : 'Estivo'}
+      </div>
+      <div className="eco-grid">
+        {giorni.map(g => (
+          <div key={g} className="eco-row">
+            <div className="eco-day">{g.charAt(0).toUpperCase() + g.slice(1)}</div>
+            <div className="eco-time">{orari[g]}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
