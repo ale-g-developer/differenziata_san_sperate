@@ -48,52 +48,6 @@ function Rifiuti() {
     return () => clearInterval(t);
   }, []);
 
-  // Notifiche alle 20:00
-  useEffect(() => {
-    // Chiedi permesso per notifiche
-    if ('Notification' in window && Notification.permission === 'default') {
-      Notification.requestPermission();
-    }
-
-    const checkNotification = () => {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      
-      // Se è 20:00 (ognuno dei minuti tra 20:00 e 20:01)
-      if (hours === 20 && minutes === 0) {
-        const today = dateKey(now);
-        const lastNotifDate = localStorage.getItem('lastNotificationDate');
-        
-        // Evita duplicati: invia solo una volta al giorno
-        if (lastNotifDate !== today && cal) {
-          const entry = cal.calendario[today];
-          const collectedToday = filtra(entry?.raccolte || [], zona);
-          
-          // Invia notifica SOLO se c'è qualcosa da raccogliere
-          if (collectedToday.length > 0 && 'Notification' in window && Notification.permission === 'granted') {
-            const title = '♻️ Raccolta rifiuti';
-            const body = 'Oggi si raccoglie: ' + collectedToday.map(r => cal.legenda[r] || r).join(', ');
-            
-            new Notification(title, {
-              body: body,
-              icon: '♻️',
-              badge: '♻️',
-              tag: 'waste-notification'
-            });
-            
-            localStorage.setItem('lastNotificationDate', today);
-          }
-        }
-      }
-    };
-
-    // Controlla ogni minuto
-    const interval = setInterval(checkNotification, 60000);
-    
-    return () => clearInterval(interval);
-  }, [cal, zona]);
-
   if (error) return <div className="rif-error">❌ {error}</div>;
   if (!cal) return <div className="rif-loading"><div className="spinner" /><span>Caricamento…</span></div>;
 
@@ -158,13 +112,14 @@ function Rifiuti() {
                   </div>
                 ))}
                 <div className="line-nota">⏰ {cal.nota_esposizione}</div>
-                {GIORNI_PANN.includes(giorno) && (
-                  <div className="line-pannolini">🍼 {cal.servizio_pannolini.nota}</div>
-                )}
               </>
             )}
           </div>
         </div>
+
+        {GIORNI_PANN.includes(giorno) && (
+          <div className="rif-alert-pannolini">🍼 {cal.servizio_pannolini.nota}</div>
+        )}
 
         {/* SETTIMANA */}
         <h2 className="rif-section-head">📋 Questa settimana</h2>
