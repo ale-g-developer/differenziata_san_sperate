@@ -34,6 +34,8 @@
     "CAR": "Carta e Cartone",
     "PLA": "Plastica",
     "VE+MET": "Vetro e Metalli",
+    "VE+MET_A": "Vetro e Metalli - Solo Zona A",
+    "VE+MET_B": "Vetro e Metalli - Solo Zona B",
     "SEC_A": "Secco Residuo - Solo Zona A",
     "SEC_B": "Secco Residuo - Solo Zona B"
   },

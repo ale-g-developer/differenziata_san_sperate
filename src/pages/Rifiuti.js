@@ -4,7 +4,7 @@ import './Rifiuti.css';
 
 const ICONS = { ORG: '🟤', CAR: '📦', PLA: '🟡', 'VE+MET': '🟢', SEC_A: '⚫', SEC_B: '⚫' };
 const CSS_CLS = { ORG: 'org', CAR: 'car', PLA: 'pla', 'VE+MET': 'vet', SEC_A: 'sec', SEC_B: 'sec' };
-const BREVI = { ORG: 'Organico', CAR: 'Carta', PLA: 'Plastica', 'VE+MET': 'Vetro/Met', SEC_A: 'Secco', SEC_B: 'Secco' };
+const BREVI = { ORG: 'Organico', CAR: 'Carta', PLA: 'Plastica', 'VE+MET': 'Vetro/Met', 'VE+MET_A': 'Vetro/Met A', 'VE+MET_B': 'Vetro/Met B', SEC_A: 'Secco', SEC_B: 'Secco' };
 const GIORNI_PANN = ['Martedì', 'Giovedì', 'Sabato'];
 
 function pad(n) { return String(n).padStart(2, '0'); }
@@ -12,6 +12,10 @@ function dateKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-'
 function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
 function formatDate(d) {
   return d.getDate() + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear();
+}
+
+function normalizeCode(code) {
+  return code && code.startsWith('VE+MET') ? 'VE+MET' : code;
 }
 
 function getTarget() {
@@ -23,8 +27,8 @@ function getTarget() {
 }
 
 function filtra(raccolte, zona) {
-  const escludi = zona === 'A' ? 'SEC_B' : 'SEC_A';
-  return (raccolte || []).filter(r => r !== escludi);
+  const escludi = zona === 'A' ? ['SEC_B', 'VE+MET_B'] : ['SEC_A', 'VE+MET_A'];
+  return (raccolte || []).filter(r => !escludi.includes(r));
 }
 
 // --- Componente principale ---
@@ -106,11 +110,15 @@ function Rifiuti() {
             ) : (
               <>
                 <div className="line-subtitle">🗑️ {target.label}:</div>
-                {raccolte.map(r => (
-                  <div key={r} className={`line-raccolta ${CSS_CLS[r] || ''}`}>
-                    {ICONS[r] || '•'} {cal.legenda[r] || r}
-                  </div>
-                ))}
+                {raccolte.map(r => {
+                  const code = normalizeCode(r);
+                  const label = cal.legenda[r] || cal.legenda[code] || r;
+                  return (
+                    <div key={r} className={`line-raccolta ${CSS_CLS[code] || ''}`}>
+                      {ICONS[code] || '•'} {label}
+                    </div>
+                  );
+                })}
                 <div className="line-nota">⏰ {cal.nota_esposizione}</div>
               </>
             )}
@@ -169,9 +177,10 @@ function WeekGrid({ cal, zona, targetKey }) {
               ) : raccolte.length === 0 ? (
                 <span className="week-empty">—</span>
               ) : (
-                raccolte.map(r => (
-                  <span key={r} className={`mini-tag ${CSS_CLS[r] || ''}`}>{BREVI[r] || r}</span>
-                ))
+                raccolte.map(r => {
+                  const code = normalizeCode(r);
+                  return <span key={r} className={`mini-tag ${CSS_CLS[code] || ''}`}>{BREVI[r] || BREVI[code] || r}</span>;
+                })
               )}
             </div>
           </div>
